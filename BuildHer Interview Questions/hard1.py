@@ -1,24 +1,24 @@
 from collections import deque
 
-def maxSlidingWindow(nums, k):
+def maxSlidingWindow(m, k):
     result = []
-    window = deque()
+    w = deque()
 
-    for i in range(len(nums)):
+    for i in range(len(m)):
         # Remove elements outside the current window
-        while window and window[0] < i - k + 1:
-            window.popleft()
+        while w and w[0] < i - k + 1:
+            w.popleft()
 
         # Remove elements smaller than the current element from the back
-        while window and nums[window[-1]] < nums[i]:
-            window.pop()
+        while w and m[w[-1]] < m[i]:
+            w.pop()
 
         # Add the current index to the window
-        window.append(i)
+        w.append(i)
 
         # Append the maximum element of the current window to the result
         if i >= k - 1:
-            result.append(nums[window[0]])
+            result.append(m[w[0]])
 
     return result
 
